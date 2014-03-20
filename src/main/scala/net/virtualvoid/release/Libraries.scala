@@ -7,6 +7,11 @@ object Libraries {
   val akkaActor = lib("akka-actor", "com.typesafe.akka", "akka-actor")
   val slick = lib("slick", "com.typesafe", "slick")
 
+  val scalaXml = lib("scala-xml", "org.scala-lang.modules", "scala-xml")
+  val scalaParserCombinators = lib("scala-parser-combinators", "org.scala-lang.modules", "scala-parser-combinators")
+  val scalaSwing = lib("scala-swing", "org.scala-lang.modules", "scala-swing")
+  val async = lib("async", "org.scala-lang.modules", "scala-async")
+
   // TESTING
   val scalaTest = lib("scalatest", "org.scalatest", "scalatest")
   val specs2 = lib("specs2", "org.specs2", "specs2-core")
@@ -34,6 +39,10 @@ object Libraries {
   val all: Seq[Library] = Seq(
     akkaActor,
     slick,
+    scalaXml,
+    scalaParserCombinators,
+    scalaSwing,
+    async,
 
     scalaTest,
     specs2,
