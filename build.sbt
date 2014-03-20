@@ -1,3 +1,7 @@
+scalaVersion := "2.10.3"
+
+scalacOptions ++= Seq("-deprecation", "-unchecked", "-language:_")
+
 libraryDependencies ++= {
   val sprayV = "1.3.1"
   val akkaV = "2.3.0"
@@ -10,8 +14,6 @@ libraryDependencies ++= {
     "org.specs2" %% "specs2" % "2.2.2" % "test"
   )
 }
-
-scalaVersion := "2.10.3"
 
 ScalariformSupport.formatSettings
 
