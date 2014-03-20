@@ -47,7 +47,7 @@ object IvyTest extends App {
     import ExtraMethods._
     val versions = IvyImplementation.findVersion(lib, targetVersion)
     import lib._
-    println(f"$name%-20s ${versions.size}%3d versions${versions.map(_.revision).latest.fold("")(v ⇒ s", latest: $v")}")
+    println(f"$name%-30s ${versions.size}%3d versions${versions.map(_.revision).latest.fold("")(v ⇒ s", latest: $v")}")
   }
 
   Libraries.all.foreach(report)
