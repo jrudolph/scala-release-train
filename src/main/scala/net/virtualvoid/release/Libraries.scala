@@ -1,6 +1,6 @@
 package net.virtualvoid.release
 
-import model.{ LibraryRef, Library }
+import net.virtualvoid.release.model.{ ModuleDef, Library }
 
 object Libraries {
   // TYPESAFE
@@ -36,6 +36,11 @@ object Libraries {
 
   val kiama = lib("kiama", "com.googlecode.kiama", "kiama")
 
+  val finagle = lib("finagle", "com.twitter", "finagle")
+  val ostrich = lib("ostrich", "com.twitter", "ostrich")
+  val algebird = lib("algebird", "com.twitter", "algebird")
+  val scalding = lib("scalding", "com.twitter", "scalding")
+
   val all: Seq[Library] = Seq(
     akkaActor,
     slick,
@@ -62,8 +67,13 @@ object Libraries {
     scopt,
     scalaArm,
 
-    kiama)
+    kiama,
+
+    finagle,
+    ostrich,
+    algebird,
+    scalding)
 
   def lib(name: String, organization: String, module: String, twitterHandle: Option[String] = None) =
-    Library(LibraryRef(name), organization, module, twitterHandle)
+    Library(name, ModuleDef(organization, module), twitterHandle)
 }

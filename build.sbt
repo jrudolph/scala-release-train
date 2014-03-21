@@ -8,6 +8,7 @@ libraryDependencies ++= {
   Seq(
     "io.spray" % "spray-routing" % sprayV,
     "io.spray" % "spray-can" % sprayV,
+    "io.spray" %% "spray-json" % "1.2.5",
     "com.typesafe.akka" %% "akka-actor" % akkaV,
     "org.scala-sbt" % "ivy" % "0.13.1",
     "ch.qos.logback" % "logback-classic" % "1.0.13" % "runtime",
