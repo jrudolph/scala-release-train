@@ -26,6 +26,7 @@ object Libraries {
   val liftJson = lib("lift-json", "net.liftweb", "lift-json")
   val playJson = lib("play-json", "com.typesafe.play", "play-json")
   val twitterJson = lib("twitter-json", "com.twitter", "scala-json")
+  val argonaut = lib("argonaut", "io.argonaut", "argonaut")
 
   // INFRASTRUCTURE + OTHERS
   val spire = lib("spire", "org.spire-math", "spire")
@@ -36,6 +37,7 @@ object Libraries {
   val scalaArm = lib("scala-arm", "com.jsuereth", "scala-arm")
   val scalaStm = lib("scala-stm", "org.scala-stm", "scala-stm")
   val scallop = lib("scallop", "org.rogach", "scallop")
+  val scalafx = lib("scalafx", "org.scalafx", "scalafx")
 
   val kiama = lib("kiama", "com.googlecode.kiama", "kiama")
 
@@ -68,6 +70,7 @@ object Libraries {
     liftJson,
     playJson,
     twitterJson,
+    argonaut,
 
     spire,
     scalazCore,
@@ -77,6 +80,7 @@ object Libraries {
     scalaArm,
     scalaStm,
     scallop,
+    scalafx,
 
     kiama,
 
