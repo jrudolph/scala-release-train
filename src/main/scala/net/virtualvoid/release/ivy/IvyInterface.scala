@@ -42,9 +42,10 @@ object IvyImplementation extends IvyInterface {
   val logger = ConsoleLogger()
   val sprayResolver = MavenRepository("spray", "http://repo.spray.io/")
   val typesafeResolver = MavenRepository("Typesafe repository", "http://repo.typesafe.com/typesafe/releases/")
+  val ossSonatype = MavenRepository("Sonatype releases", "http://oss.sonatype.org/content/repositories/releases/")
   val config = new InlineIvyConfiguration(
     new IvyPaths(new File("."), None),
-    Seq(DefaultMavenRepository, sprayResolver, typesafeResolver), Nil, Nil, false, None, Nil, None, logger)
+    Seq(DefaultMavenRepository, sprayResolver, typesafeResolver, ossSonatype), Nil, Nil, false, None, Nil, None, logger)
   val ivy = new IvySbt(config)
 
   def findJavaVersion(module: ModuleDef): Seq[ModuleID] =
