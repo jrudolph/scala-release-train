@@ -5,21 +5,21 @@ import model._
 
 case class MissingInfo(missingDependencies: Set[ModuleDef],
                        leafMissing: Set[ModuleDef],
-                       maxMissingDepthChain: List[ModuleDef]) {
+                       maxDepthMissingChain: List[ModuleDef]) {
   require((leafMissing intersect missingDependencies) == leafMissing)
-  require((maxMissingDepthChain.toSet intersect missingDependencies) == maxMissingDepthChain.toSet)
-  require(maxMissingDepthChain.isEmpty == missingDependencies.isEmpty)
+  require((maxDepthMissingChain.toSet intersect missingDependencies) == maxDepthMissingChain.toSet)
+  require(maxDepthMissingChain.isEmpty == missingDependencies.isEmpty)
 
   def merge(other: MissingInfo): MissingInfo =
     MissingInfo(
       missingDependencies union other.missingDependencies,
       leafMissing union other.leafMissing,
-      if (maxMissingDepthChain.size >= other.maxMissingDepthChain.size) maxMissingDepthChain else other.maxMissingDepthChain)
+      if (maxDepthMissingChain.size >= other.maxDepthMissingChain.size) maxDepthMissingChain else other.maxDepthMissingChain)
 
   def totalMissing: Int = missingDependencies.size
-  def maxDepth: Int = maxMissingDepthChain.size
+  def maxDepth: Int = maxDepthMissingChain.size
 
-  def formatChain: String = maxMissingDepthChain.mkString(" -> ")
+  def formatChain: String = maxDepthMissingChain.mkString(" -> ")
 }
 object MissingInfo {
   val empty = MissingInfo(Set.empty, Set.empty, Nil)
@@ -53,7 +53,7 @@ object Analysis {
             MissingInfo(
               inner.missingDependencies + module,
               if (leaf) Set(module) else inner.leafMissing,
-              module :: inner.maxMissingDepthChain)
+              module :: inner.maxDepthMissingChain)
           case _ ⇒ MissingInfo.empty
         }
       }
