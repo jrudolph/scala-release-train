@@ -25,6 +25,7 @@ object Libraries {
   val json4s = lib("json4s-native", "org.json4s", "json4s-native")
   val liftJson = lib("lift-json", "net.liftweb", "lift-json")
   val playJson = lib("play-json", "com.typesafe.play", "play-json")
+  val twitterJson = lib("twitter-json", "com.twitter", "scala-json")
 
   // INFRASTRUCTURE + OTHERS
   val spire = lib("spire", "org.spire-math", "spire")
@@ -33,6 +34,8 @@ object Libraries {
   val parboiled = lib("parboiled", "org.parboiled", "parboiled-scala")
   val scopt = lib("scopt", "com.github.scopt", "scopt")
   val scalaArm = lib("scala-arm", "com.jsuereth", "scala-arm")
+  val scalaStm = lib("scala-stm", "org.scala-stm", "scala-stm")
+  val scallop = lib("scallop", "org.rogach", "scallop")
 
   val kiama = lib("kiama", "com.googlecode.kiama", "kiama")
 
@@ -40,6 +43,9 @@ object Libraries {
   val ostrich = lib("ostrich", "com.twitter", "ostrich")
   val algebird = lib("algebird", "com.twitter", "algebird")
   val scalding = lib("scalding", "com.twitter", "scalding")
+
+  val sprayRouting = lib("spray-routing", "io.spray", "spray-routing")
+  val sprayCan = lib("spray-can", "io.spray", "spray-can")
 
   val all: Seq[Library] = Seq(
     akkaActor,
@@ -59,6 +65,7 @@ object Libraries {
     json4s,
     liftJson,
     playJson,
+    twitterJson,
 
     spire,
     scalazCore,
@@ -66,13 +73,18 @@ object Libraries {
     parboiled,
     scopt,
     scalaArm,
+    scalaStm,
+    scallop,
 
     kiama,
 
     finagle,
     ostrich,
     algebird,
-    scalding)
+    scalding,
+
+    sprayRouting,
+    sprayCan)
 
   def lib(name: String, organization: String, module: String, twitterHandle: Option[String] = None) =
     Library(name, ModuleDef(organization, module), twitterHandle)
