@@ -82,6 +82,8 @@ object RepositoryInfo {
       def modulesForScalaVersion(module: ModuleDef, scalaVersion: ScalaVersion): Seq[ModuleID] =
         states(module) match {
           case HasTargetVersion(versions) if scalaVersion == _targetVersion ⇒ versions
+          //case OtherDependency =>
+          case _ ⇒ throw new IllegalStateException(s"Cannot find state for $module (for scala $scalaVersion)")
         }
     }
   }

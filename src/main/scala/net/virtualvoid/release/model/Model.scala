@@ -11,7 +11,9 @@ object ScalaVersion {
   val `2.11` = ScalaVersion("2.11")
 }
 
-case class ModuleDef(organization: String, module: String)
+case class ModuleDef(organization: String, module: String) {
+  override def toString: String = s"$organization % $module"
+}
 
 case class Library(
     name: String,

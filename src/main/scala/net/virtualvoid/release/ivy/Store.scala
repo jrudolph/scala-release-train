@@ -15,12 +15,12 @@ trait Storage[T] {
   def readAll: Iterator[T]
 }
 object Storage {
-  def asJsonFromFile[T: RootJsonFormat](f: File): Storage[T] =
+  def asJsonFromFile[T: RootJsonFormat](f: File, isOld: T ⇒ Boolean = (_: T) ⇒ false): Storage[T] =
     new Storage[T] {
       def readAll: Iterator[T] =
         if (f.exists()) {
           val lines = Source.fromFile(f).getLines()
-          lines.map(_.asJson.convertTo[T])
+          lines.map(_.asJson.convertTo[T]).filterNot(isOld)
         } else Iterator.empty
 
       val writer = new FileWriter(f, true)
