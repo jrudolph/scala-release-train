@@ -36,16 +36,19 @@ object RepositoryInfo {
 
     def resolve(module: ModuleDef): ModuleState = {
       println(s"Resolving $module")
-      val versions = ivy.findVersion(module, _targetVersion)
-      if (versions.nonEmpty) HasTargetVersion(versions)
+      val lastVersions = ivy.findVersion(module, _lastVersion)
+      // This will prevent modules that was a java/other module in lastVersion to change being a Scala module
+      // in targetVersion if not declared as a library
+      if (lastVersions.isEmpty && !_libraries.exists(_.moduleDef == module)) OtherDependency(ivy.findJavaVersion(module))
       else {
-        val lastVersions = ivy.findVersion(module, _lastVersion)
-        if (lastVersions.nonEmpty) {
+        val versions = ivy.findVersion(module, _targetVersion)
+        if (versions.nonEmpty) HasTargetVersion(versions)
+        else {
           val latest = lastVersions.maxBy(_.revision)
           val info = ivy.resolve(latest)
           assert(info.scalaVersion.isDefined)
           PreviousVersion(lastVersions, latest, info)
-        } else OtherDependency(ivy.findJavaVersion(module))
+        }
       }
     }
 
