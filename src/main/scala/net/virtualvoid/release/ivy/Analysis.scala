@@ -16,10 +16,10 @@ case class MissingInfo(missingDependencies: Set[ModuleDef],
       leafMissing union other.leafMissing,
       if (maxDepthMissingChain.size >= other.maxDepthMissingChain.size) maxDepthMissingChain else other.maxDepthMissingChain)
 
-  def totalMissing: Int = missingDependencies.size
-  def maxDepth: Int = maxDepthMissingChain.size
+  def totalMissing: Int = missingDependencies.size - 1
+  def maxDepth: Int = maxDepthMissingChain.size - 1
 
-  def formatChain: String = maxDepthMissingChain.mkString(" -> ")
+  def formatChain: String = maxDepthMissingChain.drop(1).mkString(" -> ")
 }
 object MissingInfo {
   val empty = MissingInfo(Set.empty, Set.empty, Nil)
@@ -61,7 +61,7 @@ object Analysis {
       walk(lib.moduleDef)
     }
 
-    val missingInfos: Seq[(Library, MissingInfo)] = missing.map(l ⇒ (l, analyzeMissing(l)))
+    val missingInfos: Seq[(Library, MissingInfo)] = missing.map(l ⇒ (l, analyzeMissing(l))).sortBy(_._2.totalMissing)
     missingInfos.foreach {
       case (lib, info) ⇒
         import lib._
@@ -72,15 +72,17 @@ object Analysis {
     println("Blocking modules")
     println()
 
-    val blocking =
+    val blocking: Seq[(ModuleDef, Seq[Library])] =
       missingInfos.flatMap(lib ⇒ lib._2.leafMissing.toSeq.map(missing ⇒ (missing, lib._1))).groupBy(_._1).toSeq.map {
         case (mod, occs) ⇒
-          (mod, occs.map(_._2))
+          (mod, occs.map(_._2).filterNot(_.moduleDef == mod))
       }.sortBy(-_._2.size)
 
     blocking.foreach {
       case (mod, blockedLibraries) ⇒
-        println(f"$mod%-50s blocks ${blockedLibraries.size}%2d libraries: ${blockedLibraries.map(_.name).mkString(", ")}")
+        if (blockedLibraries.nonEmpty)
+          println(f"$mod%-50s blocks ${blockedLibraries.size}%2d libraries: ${blockedLibraries.map(_.name).mkString(", ")}")
+        else println(f"$mod%-50s blocks nothing but itself")
     }
 
     /*println()
