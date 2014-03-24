@@ -39,13 +39,15 @@ object Libraries {
 
   val kiama = lib("kiama", "com.googlecode.kiama", "kiama")
 
-  val finagle = lib("finagle", "com.twitter", "finagle")
+  val finagleCore = lib("finagle-core", "com.twitter", "finagle-core")
   val ostrich = lib("ostrich", "com.twitter", "ostrich")
-  val algebird = lib("algebird", "com.twitter", "algebird")
-  val scalding = lib("scalding", "com.twitter", "scalding")
+  val algebirdCore = lib("algebird-core", "com.twitter", "algebird-core")
+  val scaldingCore = lib("scalding-core", "com.twitter", "scalding-core")
 
   val sprayRouting = lib("spray-routing", "io.spray", "spray-routing")
   val sprayCan = lib("spray-can", "io.spray", "spray-can")
+
+  val twirlApi = lib("twirl-api", "io.spray", "twirl-api")
 
   val all: Seq[Library] = Seq(
     akkaActor,
@@ -78,13 +80,15 @@ object Libraries {
 
     kiama,
 
-    finagle,
+    finagleCore,
     ostrich,
-    algebird,
-    scalding,
+    algebirdCore,
+    scaldingCore,
 
     sprayRouting,
-    sprayCan)
+    sprayCan,
+
+    twirlApi)
 
   def lib(name: String, organization: String, module: String, twitterHandle: Option[String] = None) =
     Library(name, ModuleDef(organization, module), twitterHandle)
