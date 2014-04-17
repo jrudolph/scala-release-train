@@ -31,7 +31,7 @@ object Analysis {
 
     val (available, missing) = info.libraries.partition(l ⇒ info.isAvailable(l.moduleDef))
 
-    println(s"Libraries available for ${info.targetVersion}")
+    println(f"${available.size}%2d libraries available for ${info.targetVersion}%s")
     println()
     available.foreach { lib ⇒
       import lib._
@@ -76,7 +76,7 @@ object Analysis {
       missingInfos.flatMap(lib ⇒ lib._2.leafMissing.toSeq.map(missing ⇒ (missing, lib._1))).groupBy(_._1).toSeq.map {
         case (mod, occs) ⇒
           (mod, occs.map(_._2).filterNot(_.moduleDef == mod))
-      }.sortBy(-_._2.size)
+      }.sortBy(e ⇒ (-e._2.size, e._1.organization))
 
     blocking.foreach {
       case (mod, blockedLibraries) ⇒
