@@ -1,3 +1,5 @@
+import AssemblyKeys._
+
 scalaVersion := "2.10.3"
 
 scalacOptions ++= Seq("-deprecation", "-unchecked", "-language:_")
@@ -20,3 +22,5 @@ libraryDependencies ++= {
 ScalariformSupport.formatSettings
 
 Revolver.settings
+
+assemblySettings
