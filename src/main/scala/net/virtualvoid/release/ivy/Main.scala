@@ -33,25 +33,24 @@ object Main extends App {
   val logger = if (quiet) NoLogger else sbt.ConsoleLogger()
   val storage = Storage.asJsonFromFile[Entry](new File("cache.bin"), isOldVersions)
   val impl = CachedIvy(storage, new IvyImplementation(logger))
-  import ExtraMethods._
-
-  def report(lib: Library): Unit = {
-    val versions = impl.findVersion(lib, targetVersion)
-    import lib._
-    println(f"$name%-30s ${versions.size}%3d versions${versions.map(_.revision).latest.fold("")(v ⇒ s", latest: $v")}")
-  }
-  def reportLastVersion(lib: Library): Unit = {
-    import lib._
-    val versions = impl.findVersion(lib, lastVersion)
-    println(f"$name%-30s ${versions.size}%3d versions${versions.map(_.revision).latest.fold("")(v ⇒ s", latest: $v")}")
-    val info = impl.resolve(versions.maxBy(_.revision))
-    println(info, info.scalaVersion)
-  }
 
   val selected = Seq(Libraries.scalacheck, Libraries.scalaTest, Libraries.sprayJson)
   val info = RepositoryInfo.gather(impl, Libraries.all, targetVersion, lastVersion, quiet)
   Analysis.simpleMissingDependencyAnalysis(info)
-  //Libraries.all.foreach(report)
+
+  val Disclaimer =
+    """
+      |Disclaimer: This tool only regards "test" dependencies if they are part of the pom.
+      |It contains a fixed list of libraries and will only detect any releases for those
+      |(or their transitive dependencies).
+      |
+      |These libraries are currently checked (name, organization % module):
+    """.stripMargin
+  println(Disclaimer)
+  Libraries.all.sortBy(_.name).foreach { lib ⇒
+    import lib._
+    println(f"$name%-25s $moduleDef")
+  }
 }
 
 object NoLogger extends sbt.BasicLogger {
