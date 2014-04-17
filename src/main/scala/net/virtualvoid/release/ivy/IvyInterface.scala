@@ -38,8 +38,7 @@ object ExtraMethods {
   }
 }
 
-object IvyImplementation extends IvyInterface {
-  val logger = ConsoleLogger()
+class IvyImplementation(logger: sbt.Logger) extends IvyInterface {
   val sprayResolver = MavenRepository("spray", "http://repo.spray.io/")
   val typesafeResolver = MavenRepository("Typesafe repository", "http://repo.typesafe.com/typesafe/releases/")
   val ossSonatype = MavenRepository("Sonatype releases", "http://oss.sonatype.org/content/repositories/releases/")

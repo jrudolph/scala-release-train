@@ -31,11 +31,11 @@ trait RepositoryInfo {
   def isAvailable(module: ModuleDef): Boolean = availableModules(module)
 }
 object RepositoryInfo {
-  def gather(ivy: IvyInterface, _libraries: Seq[Library], _targetVersion: ScalaVersion, _lastVersion: ScalaVersion): RepositoryInfo = {
+  def gather(ivy: IvyInterface, _libraries: Seq[Library], _targetVersion: ScalaVersion, _lastVersion: ScalaVersion, quiet: Boolean = false): RepositoryInfo = {
     val libraryModules: Seq[ModuleDef] = _libraries.map(_.moduleDef)
 
     def resolve(module: ModuleDef): ModuleState = {
-      println(s"Resolving $module")
+      if (!quiet) println(s"Resolving $module")
       val lastVersions = ivy.findVersion(module, _lastVersion)
       // This will prevent modules that was a java/other module in lastVersion to change being a Scala module
       // in targetVersion if not declared as a library

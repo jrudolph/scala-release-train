@@ -5,6 +5,7 @@ import model.{ Library, ScalaVersion }
 import java.io.File
 import spray.http.DateTime
 import scala.concurrent.duration._
+import sbt.{ Level, LogEvent, ControlEvent }
 
 object Main extends App {
   val targetVersion = ScalaVersion.`2.11`
@@ -24,11 +25,11 @@ object Main extends App {
     case _                           ⇒ false
   }
 
+  val quiet = args.exists(_ == "-q")
+  val logger = if (quiet) NoLogger else sbt.ConsoleLogger()
   val storage = Storage.asJsonFromFile[Entry](new File("cache.bin"), isOldVersions)
-  val impl = CachedIvy(storage, IvyImplementation)
+  val impl = CachedIvy(storage, new IvyImplementation(logger))
   import ExtraMethods._
-
-  //val targetVersion = ScalaVersion.`2.10`
 
   def report(lib: Library): Unit = {
     val versions = impl.findVersion(lib, targetVersion)
@@ -44,7 +45,16 @@ object Main extends App {
   }
 
   val selected = Seq(Libraries.scalacheck, Libraries.scalaTest, Libraries.sprayJson)
-  val info = RepositoryInfo.gather(impl, Libraries.all, targetVersion, lastVersion)
+  val info = RepositoryInfo.gather(impl, Libraries.all, targetVersion, lastVersion, quiet)
   Analysis.simpleMissingDependencyAnalysis(info)
   //Libraries.all.foreach(report)
+}
+
+object NoLogger extends sbt.BasicLogger {
+  def control(event: ControlEvent.Value, message: ⇒ String): Unit = {}
+
+  def log(level: Level.Value, message: ⇒ String): Unit = {}
+  def success(message: ⇒ String): Unit = {}
+  def trace(t: ⇒ Throwable): Unit = {}
+  def logAll(events: Seq[LogEvent]): Unit = {}
 }
