@@ -10,11 +10,18 @@ object Main extends App {
   val targetVersion = ScalaVersion.`2.11.0-RC3`
   val lastVersion = ScalaVersion.`2.10`
 
+  implicit class AddIsOlderThan(val timestamp: DateTime) extends AnyVal {
+    def isOlderThan(duration: Duration): Boolean =
+      (DateTime.now.clicks - timestamp.clicks) > duration.toMillis
+  }
+
   def isOldVersions(e: Entry): Boolean = e match {
-    case FindVersions(timestamp, mod, _) ⇒
+    case FindVersions(timestamp, mod, versions) ⇒
       mod.module.endsWith(targetVersion.version) &&
-        (DateTime.now.clicks - timestamp.clicks) > 1.hour.toMillis
-    case _ ⇒ false
+        ((versions.isEmpty && timestamp.isOlderThan(1.hour)) ||
+          (versions.nonEmpty && timestamp.isOlderThan(1.day)))
+    case Resolution(timestamp, _, _) ⇒ timestamp.isOlderThan(3.days)
+    case _                           ⇒ false
   }
 
   val storage = Storage.asJsonFromFile[Entry](new File("cache.bin"), isOldVersions)
