@@ -3,11 +3,14 @@ package model
 
 import spray.http.DateTime
 
-case class ScalaVersion(version: String) extends AnyVal
+case class ScalaVersion(version: String) extends AnyVal {
+  override def toString: String = s"Scala $version"
+}
 object ScalaVersion {
   val `2.10` = ScalaVersion("2.10")
   val `2.11.0-RC1` = ScalaVersion("2.11.0-RC1")
   val `2.11.0-RC3` = ScalaVersion("2.11.0-RC3")
+  val `2.11.0-RC4` = ScalaVersion("2.11.0-RC4")
   val `2.11` = ScalaVersion("2.11")
 }
 
