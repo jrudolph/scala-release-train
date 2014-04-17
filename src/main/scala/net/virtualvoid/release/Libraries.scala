@@ -28,16 +28,23 @@ object Libraries {
   val twitterJson = lib("twitter-json", "com.twitter", "scala-json")
   val argonaut = lib("argonaut", "io.argonaut", "argonaut")
 
+  val jsonLenses = lib("json-lenses", "net.virtual-void", "json-lenses")
+
   // INFRASTRUCTURE + OTHERS
   val spire = lib("spire", "org.spire-math", "spire")
   val scalazCore = lib("scalaz", "org.scalaz", "scalaz-core")
   val shapeless = lib("shapeless", "com.chuusai", "shapeless")
   val parboiled = lib("parboiled", "org.parboiled", "parboiled-scala")
+  val parboiled2 = lib("parboiled2", "org.parboiled", "parboiled")
   val scopt = lib("scopt", "com.github.scopt", "scopt")
   val scalaArm = lib("scala-arm", "com.jsuereth", "scala-arm")
   val scalaStm = lib("scala-stm", "org.scala-stm", "scala-stm")
   val scallop = lib("scallop", "org.rogach", "scallop")
   val scalafx = lib("scalafx", "org.scalafx", "scalafx")
+  val scalatra = lib("scalatra", "org.scalatra", "scalatra")
+  val scalateCore = lib("scalate-core", "org.fusesource.scalate", "scalate-core")
+  val ghscalaCore = lib("ghscala", "com.github.xuwei-k", "ghscala-core")
+  val platformExecuting = lib("platform-executing", "com.nocandysw", "platform-executing")
 
   val kiama = lib("kiama", "com.googlecode.kiama", "kiama")
 
@@ -45,6 +52,9 @@ object Libraries {
   val ostrich = lib("ostrich", "com.twitter", "ostrich")
   val algebirdCore = lib("algebird-core", "com.twitter", "algebird-core")
   val scaldingCore = lib("scalding-core", "com.twitter", "scalding-core")
+
+  val dispatchCore = lib("dispatch-core", "net.databinder", "dispatch-core")
+  val unfiltered = lib("unfiltered", "net.databinder", "unfiltered")
 
   val sprayRouting = lib("spray-routing", "io.spray", "spray-routing")
   val sprayCan = lib("spray-can", "io.spray", "spray-can")
@@ -72,15 +82,22 @@ object Libraries {
     twitterJson,
     argonaut,
 
+    jsonLenses,
+
     spire,
     scalazCore,
     shapeless,
     parboiled,
+    parboiled2,
     scopt,
     scalaArm,
     scalaStm,
     scallop,
     scalafx,
+    scalatra,
+    scalateCore,
+    ghscalaCore,
+    platformExecuting,
 
     kiama,
 
@@ -88,6 +105,9 @@ object Libraries {
     ostrich,
     algebirdCore,
     scaldingCore,
+
+    dispatchCore,
+    unfiltered,
 
     sprayRouting,
     sprayCan,
