@@ -6,8 +6,9 @@ libraryDependencies ++= {
   val sprayV = "1.3.1"
   val akkaV = "2.3.0"
   Seq(
-    "io.spray" % "spray-routing" % sprayV,
-    "io.spray" % "spray-can" % sprayV,
+    //"io.spray" % "spray-routing" % sprayV,
+    //"io.spray" % "spray-can" % sprayV,
+    "io.spray" % "spray-http" % sprayV,
     "io.spray" %% "spray-json" % "1.2.5",
     "com.typesafe.akka" %% "akka-actor" % akkaV,
     "org.scala-sbt" % "ivy" % "0.13.1",
