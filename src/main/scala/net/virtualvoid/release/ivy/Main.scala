@@ -7,7 +7,7 @@ import spray.http.DateTime
 import scala.concurrent.duration._
 
 object Main extends App {
-  val targetVersion = ScalaVersion.`2.11.0-RC3`
+  val targetVersion = ScalaVersion.`2.11`
   val lastVersion = ScalaVersion.`2.10`
 
   implicit class AddIsOlderThan(val timestamp: DateTime) extends AnyVal {
