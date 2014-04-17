@@ -27,6 +27,7 @@ object Libraries {
   val playJson = lib("play-json", "com.typesafe.play", "play-json")
   val twitterJson = lib("twitter-json", "com.twitter", "scala-json")
   val argonaut = lib("argonaut", "io.argonaut", "argonaut")
+  val raptureIO = lib("raptureIO", "com.propensive", "rapture-io")
 
   val jsonLenses = lib("json-lenses", "net.virtual-void", "json-lenses")
 
@@ -81,6 +82,7 @@ object Libraries {
     playJson,
     twitterJson,
     argonaut,
+    raptureIO,
 
     jsonLenses,
 
