@@ -11,6 +11,10 @@ object Main extends App {
   val targetVersion = ScalaVersion.`2.11`
   val lastVersion = ScalaVersion.`2.10`
 
+  val maxTargetVersionMissingAge = 10.minutes
+  val maxTargetVersionExistingAge = 6.hours
+  val maxOldVersionAge = 1.day
+
   implicit class AddIsOlderThan(val timestamp: DateTime) extends AnyVal {
     def isOlderThan(duration: Duration): Boolean =
       (DateTime.now.clicks - timestamp.clicks) > duration.toMillis
@@ -19,9 +23,9 @@ object Main extends App {
   def isOldVersions(e: Entry): Boolean = e match {
     case FindVersions(timestamp, mod, versions) ⇒
       mod.module.endsWith(targetVersion.version) &&
-        ((versions.isEmpty && timestamp.isOlderThan(1.hour)) ||
-          (versions.nonEmpty && timestamp.isOlderThan(1.day)))
-    case Resolution(timestamp, _, _) ⇒ timestamp.isOlderThan(3.days)
+        ((versions.isEmpty && timestamp.isOlderThan(maxTargetVersionMissingAge)) ||
+          (versions.nonEmpty && timestamp.isOlderThan(maxTargetVersionExistingAge)))
+    case Resolution(timestamp, _, _) ⇒ timestamp.isOlderThan(maxOldVersionAge)
     case _                           ⇒ false
   }
 
