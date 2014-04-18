@@ -11,6 +11,7 @@ object Libraries {
   val scalaParserCombinators = lib("scala-parser-combinators", "org.scala-lang.modules", "scala-parser-combinators")
   val scalaSwing = lib("scala-swing", "org.scala-lang.modules", "scala-swing")
   val async = lib("async", "org.scala-lang.modules", "scala-async")
+  val scalaLoggingSlf4f = lib("scala-logging-slf4j", "com.typesafe.scala-logging", "scala-logging-slf4j")
 
   // TESTING
   val scalaTest = lib("scalatest", "org.scalatest", "scalatest")
@@ -46,6 +47,7 @@ object Libraries {
   val scalateCore = lib("scalate-core", "org.fusesource.scalate", "scalate-core")
   val ghscalaCore = lib("ghscala", "com.github.xuwei-k", "ghscala-core")
   val platformExecuting = lib("platform-executing", "com.nocandysw", "platform-executing")
+  val nscalaTime = lib("nscala-time", "com.github.nscala-time", "nscala-time")
 
   val kiama = lib("kiama", "com.googlecode.kiama", "kiama")
 
@@ -69,6 +71,7 @@ object Libraries {
     scalaParserCombinators,
     scalaSwing,
     async,
+    scalaLoggingSlf4f,
 
     scalaTest,
     specs2,
@@ -100,6 +103,7 @@ object Libraries {
     scalateCore,
     ghscalaCore,
     platformExecuting,
+    nscalaTime,
 
     kiama,
 
