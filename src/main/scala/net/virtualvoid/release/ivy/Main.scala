@@ -11,9 +11,13 @@ object Main extends App {
   val targetVersion = ScalaVersion.`2.11`
   val lastVersion = ScalaVersion.`2.10`
 
-  val maxTargetVersionMissingAge = 10.minutes
-  val maxTargetVersionExistingAge = 6.hours
-  val maxOldVersionAge = 1.day
+  val quiet = args.exists(_ == "-q")
+  val onlyCached = args.exists(_ == "-c")
+  def maxCachedFor(dur: Duration): Duration = if (onlyCached) 1000.days else dur
+
+  val maxTargetVersionMissingAge = maxCachedFor(10.minutes)
+  val maxTargetVersionExistingAge = maxCachedFor(6.hours)
+  val maxOldVersionAge = maxCachedFor(1.day)
 
   implicit class AddIsOlderThan(val timestamp: DateTime) extends AnyVal {
     def isOlderThan(duration: Duration): Boolean =
@@ -29,7 +33,6 @@ object Main extends App {
     case _                           ⇒ false
   }
 
-  val quiet = args.exists(_ == "-q")
   val logger = if (quiet) NoLogger else sbt.ConsoleLogger()
   val storage = Storage.asJsonFromFile[Entry](new File("cache.bin"), isOldVersions)
   val impl = CachedIvy(storage, new IvyImplementation(logger))
