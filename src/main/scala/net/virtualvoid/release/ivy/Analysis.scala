@@ -33,7 +33,7 @@ object Analysis {
 
     val (available, missing) = info.libraries.partition(l ⇒ info.isAvailable(l.moduleDef))
 
-    println(f"${available.size}%2d libraries available for ${info.targetVersion}%s")
+    println(f"${available.size}%2d libraries available for ${info.targetVersion}%s (see the end for sbt config lines)")
     println()
     available.foreach { lib ⇒
       import lib._
@@ -87,6 +87,17 @@ object Analysis {
         if (blockedLibraries.nonEmpty)
           println(f"$mod%-50s blocks ${blockedLibraries.size}%2d libraries: ${blockedLibraries.map(_.name).mkString(", ")}")
         else println(f"$mod%-50s blocks nothing but itself")
+    }
+
+    println()
+    println("Sbt config lines for all available libraries in alphabetic order")
+    println()
+    for {
+      lib ← available.sortBy(l ⇒ (l.organization, l.module))
+      rev ← info.modulesForScalaVersion(lib.moduleDef, info.targetVersion).map(_.revision).sorted
+    } {
+      import lib._
+      println(s""""$organization" %% "$module" % "$rev"""")
     }
 
     /*println()
