@@ -26,6 +26,8 @@ object MissingInfo {
 }
 
 object Analysis {
+  val MaxVersions = 5
+
   def simpleMissingDependencyAnalysis(info: RepositoryInfo): Unit = {
     import ExtraMethods._
 
@@ -35,8 +37,10 @@ object Analysis {
     println()
     available.foreach { lib ⇒
       import lib._
-      val versions = info.modulesForScalaVersion(lib.moduleDef, info.targetVersion)
-      println(f"$name%-30s ${versions.size}%3d versions${versions.map(_.revision).latest.fold("")(v ⇒ s", latest: $v")}")
+      val versions = info.modulesForScalaVersion(lib.moduleDef, info.targetVersion).map(_.revision).sortBy(_.toString).reverse
+      val versionsString = versions.take(MaxVersions).mkString(", ")
+      val ellipsis = if (versions.size > MaxVersions) s", ... [${versions.size - MaxVersions} more]" else ""
+      println(f"$name%-30s ${versions.size}%3d versions: $versionsString$ellipsis")
     }
     println()
 
