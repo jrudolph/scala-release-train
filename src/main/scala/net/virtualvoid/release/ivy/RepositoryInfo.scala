@@ -13,6 +13,9 @@ case class HasTargetVersion(versions: Seq[ModuleID]) extends ModuleState {
 case class PreviousVersion(versions: Seq[ModuleID], latest: ModuleID, latestInfo: model.ModuleInfo) extends ModuleState {
   def isAvailable = false
 }
+case object PreviouslyUnknown extends ModuleState {
+  def isAvailable: Boolean = false
+}
 case class OtherDependency(versions: Seq[ModuleID]) extends ModuleState {
   def isAvailable: Boolean = true // versions.nonEmpty ???
 }
@@ -43,6 +46,7 @@ object RepositoryInfo {
       else {
         val versions = ivy.findVersion(module, _targetVersion)
         if (versions.nonEmpty) HasTargetVersion(versions)
+        else if (lastVersions.isEmpty) PreviouslyUnknown
         else {
           val latest = lastVersions.maxBy(_.revision)
           val info = ivy.resolve(latest)

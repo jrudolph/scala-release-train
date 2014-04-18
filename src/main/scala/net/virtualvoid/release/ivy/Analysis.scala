@@ -69,7 +69,11 @@ object Analysis {
     missingInfos.foreach {
       case (lib, info) ⇒
         import lib._
-        println(f"$name%-30s ${info.totalMissing}%2d missing dependencies, deepest chain: ${info.maxDepth}%d ${info.formatChain}")
+
+        if (info.totalMissing >= 0)
+          println(f"$name%-30s ${info.totalMissing}%2d missing dependencies, deepest chain: ${info.maxDepth}%d ${info.formatChain}")
+        else // previously unknown
+          println(f"$name%-30s has no previous version to analyze")
     }
 
     println()
