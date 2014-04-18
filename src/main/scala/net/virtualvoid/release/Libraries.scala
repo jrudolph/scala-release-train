@@ -81,7 +81,7 @@ object Libraries {
     scalaSwing,
     async,
     scalaLoggingSlf4f,
-    macroParadise,
+    //macroParadise, // cross-published with full version
 
     scalaTest,
     specs2,
