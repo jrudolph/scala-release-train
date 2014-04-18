@@ -12,6 +12,7 @@ object Libraries {
   val scalaSwing = lib("scala-swing", "org.scala-lang.modules", "scala-swing")
   val async = lib("async", "org.scala-lang.modules", "scala-async")
   val scalaLoggingSlf4f = lib("scala-logging-slf4j", "com.typesafe.scala-logging", "scala-logging-slf4j")
+  val macroParadise = lib("macro-paradise", "org.scalamacros", "paradise")
 
   // TESTING
   val scalaTest = lib("scalatest", "org.scalatest", "scalatest")
@@ -20,6 +21,7 @@ object Libraries {
 
   // DB
   val squeryl = lib("squeryl", "org.squeryl", "squeryl")
+  val scalikejdbInterpolation = lib("scalikejdbc-interpolation", "org.scalikejdbc", "scalikejdbc-interpolation")
 
   // JSON
   val sprayJson = lib("spray-json", "io.spray", "spray-json")
@@ -48,6 +50,13 @@ object Libraries {
   val ghscalaCore = lib("ghscala", "com.github.xuwei-k", "ghscala-core")
   val platformExecuting = lib("platform-executing", "com.nocandysw", "platform-executing")
   val nscalaTime = lib("nscala-time", "com.github.nscala-time", "nscala-time")
+  val nalloc = lib("nalloc", "org.nalloc", "optional")
+  val scalaFx = lib("scalafx", "org.scalafx", "scalafx")
+  val f0 = lib("f0", "com.clarifi", "f0")
+  val scrimage = lib("scrimage", "com.sksamuel.scrimage", "scrimage")
+  val monifu = lib("monifu", "org.monifu", "monifu")
+  val macwire = lib("MacWire", "com.softwaremill.macwire", "macros")
+  val scalamacrodebug = lib("scalamacrodebug", "com.softwaremill.scalamacrodebug", "macros")
 
   val kiama = lib("kiama", "com.googlecode.kiama", "kiama")
 
@@ -72,12 +81,14 @@ object Libraries {
     scalaSwing,
     async,
     scalaLoggingSlf4f,
+    macroParadise,
 
     scalaTest,
     specs2,
     scalacheck,
 
     squeryl,
+    scalikejdbInterpolation,
 
     sprayJson,
     json4s,
@@ -104,6 +115,13 @@ object Libraries {
     ghscalaCore,
     platformExecuting,
     nscalaTime,
+    nalloc,
+    scalaFx,
+    f0,
+    scrimage,
+    monifu,
+    macwire,
+    scalamacrodebug,
 
     kiama,
 
