@@ -5,6 +5,8 @@ import net.virtualvoid.release.model.{ ModuleDef, Library }
 object Libraries {
   // TYPESAFE
   val akkaActor = lib("akka-actor", "com.typesafe.akka", "akka-actor")
+  val akkaOsgi = lib("akka-osgi", "com.typesafe.akka", "akka-osgi")
+  val akkaTestkit = lib("akka-testkit", "com.typesafe.akka", "akka-testkit")
   val slick = lib("slick", "com.typesafe", "slick")
 
   val scalaXml = lib("scala-xml", "org.scala-lang.modules", "scala-xml")
@@ -74,6 +76,8 @@ object Libraries {
 
   val all: Seq[Library] = Seq(
     akkaActor,
+    akkaOsgi,
+    akkaTestkit,
     slick,
     scalaXml,
     scalaParserCombinators,
