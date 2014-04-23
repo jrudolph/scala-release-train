@@ -6,6 +6,7 @@ object Libraries {
   // TYPESAFE
   val akkaActor = lib("akka-actor", "com.typesafe.akka", "akka-actor")
   val akkaOsgi = lib("akka-osgi", "com.typesafe.akka", "akka-osgi")
+  val akkaSlf4j = lib("akka-slf4j", "com.typesafe.akka", "akka-slf4j")
   val akkaTestkit = lib("akka-testkit", "com.typesafe.akka", "akka-testkit")
   val slick = lib("slick", "com.typesafe", "slick")
 
@@ -77,6 +78,7 @@ object Libraries {
   val all: Seq[Library] = Seq(
     akkaActor,
     akkaOsgi,
+    akkaSlf4j,
     akkaTestkit,
     slick,
     scalaXml,
