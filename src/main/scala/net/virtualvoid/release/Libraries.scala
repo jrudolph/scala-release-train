@@ -51,7 +51,6 @@ object Libraries {
   val platformExecuting = lib("platform-executing", "com.nocandysw", "platform-executing")
   val nscalaTime = lib("nscala-time", "com.github.nscala-time", "nscala-time")
   val nalloc = lib("nalloc", "org.nalloc", "optional")
-  val scalaFx = lib("scalafx", "org.scalafx", "scalafx")
   val f0 = lib("f0", "com.clarifi", "f0")
   val scrimage = lib("scrimage", "com.sksamuel.scrimage", "scrimage")
   val monifu = lib("monifu", "org.monifu", "monifu")
@@ -116,7 +115,6 @@ object Libraries {
     platformExecuting,
     nscalaTime,
     nalloc,
-    scalaFx,
     f0,
     scrimage,
     monifu,
