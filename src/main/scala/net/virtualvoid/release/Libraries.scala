@@ -49,7 +49,7 @@ object Libraries {
   val scallop = lib("scallop", "org.rogach", "scallop")
   val scalafx = lib("scalafx", "org.scalafx", "scalafx")
   val scalatra = lib("scalatra", "org.scalatra", "scalatra")
-  val scalateCore = lib("scalate-core", "org.fusesource.scalate", "scalate-core")
+  val scalateCore = lib("scalate-core", "org.scalatra.scalate", "scalate-core")
   val ghscalaCore = lib("ghscala", "com.github.xuwei-k", "ghscala-core")
   val platformExecuting = lib("platform-executing", "com.nocandysw", "platform-executing")
   val nscalaTime = lib("nscala-time", "com.github.nscala-time", "nscala-time")
