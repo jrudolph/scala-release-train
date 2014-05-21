@@ -14,7 +14,8 @@ object Main extends App {
 
   val quiet = args.exists(_ == "-q")
   val preferCached = args.exists(_ == "-c")
-  def maxCachedFor(dur: Duration): Duration = if (preferCached) 1000.days else dur
+  val onlyCached = args.exists(_ == "-n")
+  def maxCachedFor(dur: Duration): Duration = if (preferCached || onlyCached) 10000.days else dur
 
   val maxTargetVersionMissingAge = maxCachedFor(10.minutes)
   val maxTargetVersionExistingAge = maxCachedFor(6.hours)
@@ -35,7 +36,8 @@ object Main extends App {
   }
 
   val storage = Storage.asJsonFromFile[Entry](new File("cache.bin"), isOldVersions)
-  val impl = CachedRepository(storage, IvyRepositoryImplementation(quiet))
+  val backend = if (onlyCached) NoRepository else IvyRepositoryImplementation(quiet)
+  val impl = CachedRepository(storage, backend)
 
   val info = RepositoryInfo.gather(impl, Libraries.all, targetVersion, lastVersion, quiet)
   Analysis.simpleMissingDependencyAnalysis(info)
