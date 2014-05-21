@@ -37,7 +37,6 @@ object Main extends App {
   val storage = Storage.asJsonFromFile[Entry](new File("cache.bin"), isOldVersions)
   val impl = CachedRepository(storage, IvyRepositoryImplementation(quiet))
 
-  val selected = Seq(Libraries.scalacheck, Libraries.scalaTest, Libraries.sprayJson)
   val info = RepositoryInfo.gather(impl, Libraries.all, targetVersion, lastVersion, quiet)
   Analysis.simpleMissingDependencyAnalysis(info)
 
