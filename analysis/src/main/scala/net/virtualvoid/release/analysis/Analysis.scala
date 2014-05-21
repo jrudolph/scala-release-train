@@ -36,7 +36,7 @@ object Analysis {
     println()
     available.foreach { lib ⇒
       import lib._
-      val versions = info.modulesForScalaVersion(lib.moduleDef, info.targetVersion).map(_.revision).sortBy(_.toString).reverse
+      val versions = info.modulesForScalaVersion(lib.moduleDef, info.targetVersion).map(_.revision).sorted.reverse
       val versionsString = versions.take(MaxVersions).mkString(", ")
       val ellipsis = if (versions.size > MaxVersions) s", ... [${versions.size - MaxVersions} more]" else ""
       println(f"$name%-30s ${versions.size}%3d versions: $versionsString$ellipsis")
