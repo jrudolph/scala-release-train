@@ -44,11 +44,11 @@ object Entry {
 case class FindVersions(timestamp: DateTime, module: ModuleDef, versions: Seq[ModuleID]) extends Entry
 case class Resolution(timestamp: DateTime, module: ModuleID, info: ModuleInfo) extends Entry
 
-object CachedIvy {
+object CachedRepository {
   case class Cache(versions: Map[ModuleDef, FindVersions] = Map.empty,
                    resolutions: Map[ModuleID, Resolution] = Map.empty)
-  def apply(storage: Storage[Entry], backend: IvyInterface): IvyInterface =
-    new IvyInterface {
+  def apply(storage: Storage[Entry], backend: RepositoryInterface): RepositoryInterface =
+    new RepositoryInterface {
       val store = EventStore(storage, Cache()) { (state, event) ⇒
         event match {
           case f: FindVersions ⇒ state.copy(versions = state.versions.updated(f.module, f))

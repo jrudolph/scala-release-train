@@ -35,7 +35,7 @@ object Main extends App {
 
   val logger = if (quiet) NoLogger else sbt.ConsoleLogger()
   val storage = Storage.asJsonFromFile[Entry](new File("cache.bin"), isOldVersions)
-  val impl = CachedIvy(storage, new IvyImplementation(logger))
+  val impl = CachedRepository(storage, new IvyRepositoryImplementation(logger))
 
   val selected = Seq(Libraries.scalacheck, Libraries.scalaTest, Libraries.sprayJson)
   val info = RepositoryInfo.gather(impl, Libraries.all, targetVersion, lastVersion, quiet)

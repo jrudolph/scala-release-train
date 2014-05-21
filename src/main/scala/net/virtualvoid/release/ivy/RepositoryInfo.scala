@@ -34,7 +34,7 @@ trait RepositoryInfo {
   def isAvailable(module: ModuleDef): Boolean = availableModules(module)
 }
 object RepositoryInfo {
-  def gather(ivy: IvyInterface, _libraries: Seq[Library], _targetVersion: ScalaVersion, _lastVersion: ScalaVersion, quiet: Boolean = false): RepositoryInfo = {
+  def gather(ivy: RepositoryInterface, _libraries: Seq[Library], _targetVersion: ScalaVersion, _lastVersion: ScalaVersion, quiet: Boolean = false): RepositoryInfo = {
     val libraryModules: Seq[ModuleDef] = _libraries.map(_.moduleDef)
 
     def resolve(module: ModuleDef): ModuleState = {
