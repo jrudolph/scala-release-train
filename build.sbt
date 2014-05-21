@@ -2,7 +2,7 @@ import AssemblyKeys._
 
 scalaVersion := "2.10.3"
 
-scalacOptions ++= Seq("-deprecation", "-unchecked", "-language:_")
+scalacOptions ++= Seq("-deprecation", "-unchecked", "-language:_", "-Xfatal-warnings", "-Ywarn-nullary-unit", "-Ywarn-dead-code")
 
 libraryDependencies ++= {
   val sprayV = "1.3.1"
