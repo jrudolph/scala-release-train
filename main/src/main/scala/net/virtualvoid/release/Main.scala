@@ -1,21 +1,20 @@
 package net.virtualvoid.release
-package ivy
 
 import model.ScalaVersion
 import java.io.File
 import spray.http.DateTime
 import scala.concurrent.duration._
-import sbt.{ Level, LogEvent, ControlEvent }
 import cached._
-import net.virtualvoid.release.analysis.{ Analysis, RepositoryInfo }
+import analysis.{ Analysis, RepositoryInfo }
+import ivy.IvyRepositoryImplementation
 
 object Main extends App {
   val targetVersion = ScalaVersion.`2.11`
   val lastVersion = ScalaVersion.`2.10`
 
   val quiet = args.exists(_ == "-q")
-  val onlyCached = args.exists(_ == "-c")
-  def maxCachedFor(dur: Duration): Duration = if (onlyCached) 1000.days else dur
+  val preferCached = args.exists(_ == "-c")
+  def maxCachedFor(dur: Duration): Duration = if (preferCached) 1000.days else dur
 
   val maxTargetVersionMissingAge = maxCachedFor(10.minutes)
   val maxTargetVersionExistingAge = maxCachedFor(6.hours)
@@ -35,9 +34,8 @@ object Main extends App {
     case _                           ⇒ false
   }
 
-  val logger = if (quiet) NoLogger else sbt.ConsoleLogger()
   val storage = Storage.asJsonFromFile[Entry](new File("cache.bin"), isOldVersions)
-  val impl = CachedRepository(storage, new IvyRepositoryImplementation(logger))
+  val impl = CachedRepository(storage, IvyRepositoryImplementation(quiet))
 
   val selected = Seq(Libraries.scalacheck, Libraries.scalaTest, Libraries.sprayJson)
   val info = RepositoryInfo.gather(impl, Libraries.all, targetVersion, lastVersion, quiet)
@@ -56,13 +54,4 @@ object Main extends App {
     import lib._
     println(f"$name%-25s $moduleDef")
   }
-}
-
-object NoLogger extends sbt.BasicLogger {
-  def control(event: ControlEvent.Value, message: ⇒ String): Unit = {}
-
-  def log(level: Level.Value, message: ⇒ String): Unit = {}
-  def success(message: ⇒ String): Unit = {}
-  def trace(t: ⇒ Throwable): Unit = {}
-  def logAll(events: Seq[LogEvent]): Unit = {}
 }

@@ -1,4 +1,4 @@
-package net.virtualvoid.release
+package net.virtualvoid.release.ivy
 
 import java.io.File
 
@@ -9,6 +9,7 @@ import org.apache.ivy.core.module.id.ModuleRevisionId
 import org.apache.ivy.core.resolve.ResolveOptions
 import spray.http.DateTime
 import org.apache.ivy.util.filter.Filter
+import net.virtualvoid.release.{ model, RepositoryInterface }
 
 class IvyRepositoryImplementation(logger: sbt.Logger) extends RepositoryInterface {
   val sprayResolver = MavenRepository("spray", "http://repo.spray.io/")
@@ -45,4 +46,11 @@ class IvyRepositoryImplementation(logger: sbt.Logger) extends RepositoryInterfac
     new Filter {
       def accept(o: AnyRef): Boolean = f.isDefinedAt(o) && f(o)
     }
+}
+
+object IvyRepositoryImplementation {
+  def apply(quiet: Boolean): RepositoryInterface = {
+    val logger = if (quiet) NoLogger else sbt.ConsoleLogger()
+    new IvyRepositoryImplementation(logger)
+  }
 }
