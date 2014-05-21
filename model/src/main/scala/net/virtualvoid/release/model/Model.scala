@@ -31,7 +31,33 @@ case class Revision(revision: String) /*extends AnyVal*/ {
   override def toString: String = revision
 }
 object Revision {
-  implicit def revisionOrdering: Ordering[Revision] = Ordering.by[Revision, String](_.revision)
+  val Version = """(\d+(?:\.\d+)*)(?:-(.*))?""".r
+  trait Suffix {
+    def unapply(str: String): Option[String]
+  }
+  def Suffix(prefix: String): Suffix =
+    new Suffix {
+      val p = prefix.toLowerCase
+
+      def unapply(str: String): Option[String] =
+        if (str.toLowerCase.startsWith(p)) Some(str) else None
+    }
+
+  val Milestone = Suffix("m")
+  val Alpha = Suffix("alpha")
+  val Beta = Suffix("beta")
+  val RC = Suffix("rc")
+
+  implicit def revisionOrdering: Ordering[Revision] = Ordering.by[Revision, (String, Int, String)] {
+    _.revision match {
+      case Version(v, null)              ⇒ (v, 0, "") // full version
+      case Version(v, RC(suffix))        ⇒ (v, -1, suffix)
+      case Version(v, Beta(suffix))      ⇒ (v, -2, suffix)
+      case Version(v, Alpha(suffix))     ⇒ (v, -3, suffix)
+      case Version(v, Milestone(suffix)) ⇒ (v, -4, suffix)
+      case v                             ⇒ (v, -100, "")
+    }
+  }
 }
 
 case class ModuleID(organization: String, module: String, revision: Revision) {
