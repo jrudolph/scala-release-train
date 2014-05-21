@@ -1,13 +1,12 @@
-package net.virtualvoid.release.ivy
+package net.virtualvoid.release
 
-import sbt._
 import java.io.File
 
-import org.apache.ivy.core.module.id.ModuleRevisionId
-import org.apache.ivy.core.resolve.ResolveOptions
+import sbt._
 
 import net.virtualvoid.release.model.{ Revision, ModuleID, ModuleDef }
-import net.virtualvoid.release.model
+import org.apache.ivy.core.module.id.ModuleRevisionId
+import org.apache.ivy.core.resolve.ResolveOptions
 import spray.http.DateTime
 import org.apache.ivy.util.filter.Filter
 

@@ -1,7 +1,7 @@
 package net.virtualvoid.release
-package ivy
+package analysis
 
-import model._
+import net.virtualvoid.release.model.{ Library, ModuleDef }
 
 case class MissingInfo(missingDependencies: Set[ModuleDef],
                        leafMissing: Set[ModuleDef],
@@ -29,7 +29,6 @@ object Analysis {
   val MaxVersions = 5
 
   def simpleMissingDependencyAnalysis(info: RepositoryInfo): Unit = {
-    import ExtraMethods._
 
     val (available, missing) = info.libraries.partition(l ⇒ info.isAvailable(l.moduleDef))
 
@@ -69,7 +68,6 @@ object Analysis {
     missingInfos.foreach {
       case (lib, info) ⇒
         import lib._
-
         if (info.totalMissing >= 0)
           println(f"$name%-30s ${info.totalMissing}%2d missing dependencies, deepest chain: ${info.maxDepth}%d ${info.formatChain}")
         else // previously unknown

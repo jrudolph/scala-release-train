@@ -1,9 +1,9 @@
-package net.virtualvoid.release.ivy
+package net.virtualvoid.release
+package cached
 
-import java.io.{ FileWriter, FileOutputStream, OutputStream, File }
+import java.io.{ FileWriter, File }
 import spray.json._
 import scala.io.Source
-import scala.annotation.tailrec
 
 trait EventStore[E, S] {
   def process(event: E): S
@@ -20,7 +20,7 @@ object Storage {
       def readAll: Iterator[T] =
         if (f.exists()) {
           val lines = Source.fromFile(f).getLines()
-          lines.map(_.asJson.convertTo[T]).filterNot(isOld)
+          lines.map(_.parseJson.convertTo[T]).filterNot(isOld)
         } else Iterator.empty
 
       val writer = new FileWriter(f, true)

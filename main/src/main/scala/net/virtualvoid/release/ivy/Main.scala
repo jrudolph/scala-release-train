@@ -6,6 +6,9 @@ import java.io.File
 import spray.http.DateTime
 import scala.concurrent.duration._
 import sbt.{ Level, LogEvent, ControlEvent }
+import net.virtualvoid.release.cached._
+import net.virtualvoid.release.cached.FindVersions
+import net.virtualvoid.release.analysis.{ Analysis, RepositoryInfo }
 
 object Main extends App {
   val targetVersion = ScalaVersion.`2.11`

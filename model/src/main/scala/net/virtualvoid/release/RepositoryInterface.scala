@@ -1,17 +1,6 @@
 package net.virtualvoid.release
-package ivy
 
-import model.{ Revision, ModuleID, ScalaVersion, Library, ModuleDef }
-import sbt._
-import java.io.File
-import sbt.MavenRepository
-import org.apache.ivy.core.resolve.ResolveOptions
-import org.apache.ivy.util.filter.Filter
-import org.apache.ivy.core.module.id.ModuleRevisionId
-import spray.http.DateTime
-import net.virtualvoid.release.model
-import scala.annotation.tailrec
-import spray.json.RootJsonFormat
+import net.virtualvoid.release.model.{ ModuleDef, ModuleID, ScalaVersion, Library }
 
 trait RepositoryInterface {
   def findVersion(library: Library, scalaVersion: ScalaVersion): Seq[ModuleID] =
@@ -28,13 +17,5 @@ trait RepositoryInterface {
 
   def findJavaVersion(module: ModuleDef): Seq[ModuleID]
   def resolve(module: ModuleID): model.ModuleInfo
-}
-
-object ExtraMethods {
-  implicit class EnrichRevisionSeq(val revs: Seq[Revision]) extends AnyVal {
-    def latest: Option[Revision] =
-      if (revs.isEmpty) None
-      else Some(revs.max)
-  }
 }
 

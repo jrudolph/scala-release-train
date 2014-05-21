@@ -1,7 +1,7 @@
-package net.virtualvoid.release.ivy
+package net.virtualvoid.release.analysis
 
 import net.virtualvoid.release.model.{ ModuleDef, Library, ScalaVersion, ModuleID }
-import net.virtualvoid.release.model
+import net.virtualvoid.release.{ RepositoryInterface, model }
 import scala.annotation.tailrec
 
 sealed trait ModuleState {

@@ -1,5 +1,5 @@
 package net.virtualvoid.release
-package ivy
+package cached
 
 import spray.http.DateTime
 import net.virtualvoid.release.model.{ Revision, ModuleInfo, ModuleDef, ModuleID }
