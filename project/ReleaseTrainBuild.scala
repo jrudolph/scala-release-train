@@ -15,7 +15,8 @@ object ReleaseTrainBuild extends Build {
   lazy val commonSettings: Def.SettingsDefinition = Seq(
     scalaVersion := "2.10.4",
     scalacOptions ++= Seq("-deprecation", "-unchecked", "-language:_", "-Xfatal-warnings", "-Ywarn-nullary-unit", "-Ywarn-dead-code"),
-    libraryDependencies += "org.specs2" %% "specs2" % "2.2.2" % "test"
+    libraryDependencies += "org.specs2" %% "specs2" % "2.2.2" % "test",
+    name ~= (oldName => s"release-train-$oldName")
   ) ++ ScalariformSupport.formatSettings
 
   lazy val model =
