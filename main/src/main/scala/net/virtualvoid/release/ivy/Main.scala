@@ -1,13 +1,12 @@
 package net.virtualvoid.release
 package ivy
 
-import model.{ Library, ScalaVersion }
+import model.ScalaVersion
 import java.io.File
 import spray.http.DateTime
 import scala.concurrent.duration._
 import sbt.{ Level, LogEvent, ControlEvent }
-import net.virtualvoid.release.cached._
-import net.virtualvoid.release.cached.FindVersions
+import cached._
 import net.virtualvoid.release.analysis.{ Analysis, RepositoryInfo }
 
 object Main extends App {

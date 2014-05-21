@@ -33,11 +33,7 @@ class IvyRepositoryImplementation(logger: sbt.Logger) extends RepositoryInterfac
       val ivyModule: ModuleRevisionId = ModuleRevisionId.newInstance(module.organization, module.module, module.revision.revision)
       val options = new ResolveOptions
       options.setConfs(Array("compile", "provided", "test"))
-      /*options.setArtifactFilter(filter {
-        case a: org.apache.ivy.core.module.descriptor.Artifact ⇒
-          println(a.getType)
-          a.getType == "pom"
-      })*/
+
       val res = ivy.getResolveEngine.resolve(ivyModule, options, false)
       val depModules = IvyRetrieve.reports(res).flatMap(c ⇒ IvyRetrieve.configurationReport(c).modules)
       val deps =
