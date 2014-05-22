@@ -15,6 +15,7 @@ object Main extends App {
   val quiet = args.exists(_ == "-q")
   val preferCached = args.exists(_ == "-c")
   val onlyCached = args.exists(_ == "-n")
+  val releaseNotesAnalysis = args.exists(_ == "-r")
   def maxCachedFor(dur: Duration): Duration = if (preferCached || onlyCached) 10000.days else dur
 
   val maxTargetVersionMissingAge = maxCachedFor(10.minutes)
@@ -39,20 +40,25 @@ object Main extends App {
   val backend = if (onlyCached) NoRepository else IvyRepositoryImplementation(quiet)
   val impl = CachedRepository(storage, backend)
 
-  val info = RepositoryInfo.gather(impl, Libraries.all, targetVersion, lastVersion, quiet)
-  Analysis.simpleMissingDependencyAnalysis(info)
+  val libraries = if (releaseNotesAnalysis) LibrariesFromReleaseNotes.loadLibraries("../release-notes-2.11.1.txt") else Libraries.all
+  val info = RepositoryInfo.gather(impl, libraries, targetVersion, lastVersion, quiet)
 
-  val Disclaimer =
-    """
-      |Disclaimer: This tool only regards "test" dependencies if they are part of the pom.
-      |It contains a fixed list of libraries and will only detect any releases for those
-      |(or their transitive dependencies).
-      |
-      |These libraries are currently checked (name, organization % module):
-    """.stripMargin
-  println(Disclaimer)
-  Libraries.all.sortBy(_.name).foreach { lib ⇒
-    import lib._
-    println(f"$name%-25s $moduleDef")
+  if (releaseNotesAnalysis) LibrariesFromReleaseNotes.report(info)
+  else {
+    Analysis.simpleMissingDependencyAnalysis(info)
+
+    val Disclaimer =
+      """
+        |Disclaimer: This tool only regards "test" dependencies if they are part of the pom.
+        |It contains a fixed list of libraries and will only detect any releases for those
+        |(or their transitive dependencies).
+        |
+        |These libraries are currently checked (name, organization % module):
+      """.stripMargin
+    println(Disclaimer)
+    Libraries.all.sortBy(_.name).foreach { lib ⇒
+      import lib._
+      println(f"$name%-25s $moduleDef")
+    }
   }
 }
