@@ -64,7 +64,7 @@ object Analysis {
       walk(lib.moduleDef)
     }
 
-    val missingInfos: Seq[(Library, MissingInfo)] = missing.map(l ⇒ (l, analyzeMissing(l))).sortBy(e ⇒ (e._2.totalMissing, e._1.name))
+    val missingInfos: Seq[(Library, MissingInfo)] = missing.map(l ⇒ (l, analyzeMissing(l))).sortBy(e ⇒ (e._2.totalMissing, e._1.name.toLowerCase))
     missingInfos.foreach {
       case (lib, info) ⇒
         import lib._
