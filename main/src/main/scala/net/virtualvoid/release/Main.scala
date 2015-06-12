@@ -33,8 +33,8 @@ object Main extends App {
   Console.err.println(s"Using cache-file '$cacheFile'")
   def maxCachedFor(dur: Duration): Duration = if (preferCached || onlyCached) 10000.days else dur
 
-  val maxTargetVersionMissingAge = maxCachedFor(10.minutes)
-  val maxTargetVersionExistingAge = maxCachedFor(6.hours)
+  val maxTargetVersionMissingAge = maxCachedFor(6.hours)
+  val maxTargetVersionExistingAge = maxCachedFor(12.hours)
   val maxOldVersionAge = maxCachedFor(7.days)
 
   implicit class AddIsOlderThan(val timestamp: DateTime) extends AnyVal {
