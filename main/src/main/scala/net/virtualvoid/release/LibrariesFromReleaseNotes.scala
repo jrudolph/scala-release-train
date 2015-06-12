@@ -28,9 +28,10 @@ object LibrariesFromReleaseNotes {
     val maxOrgChars = tuples.map(_._1.length).max + 2
     val maxNameChars = tuples.map(_._2.length).max //+ 2
     def quoted(str: String): String = '"' + str + '"'
-    val formatString = s"""    %-${maxOrgChars}s %%%% %-${maxNameChars}s %% "%s""""
+    //val formatString = s"""    %-${maxOrgChars}s %%%% %-${maxNameChars}s %% "%s""""
+    val formatString = s"""%s %s %s"""
 
-    tuples.map(t ⇒ formatString.format(quoted(t._1), quoted(t._2), t._3)).foreach(println)
+    tuples.map(t ⇒ formatString.format(t._1, t._2, t._3)).foreach(println)
   }
 }
 
