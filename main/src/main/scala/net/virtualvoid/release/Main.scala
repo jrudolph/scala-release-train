@@ -9,8 +9,18 @@ import analysis.{ Analysis, RepositoryInfo }
 import ivy.IvyRepositoryImplementation
 
 object Main extends App {
-  val targetVersion = ScalaVersion.`2.11`
-  val lastVersion = ScalaVersion.`2.10`
+  val MinusToken = """-(\w+)""".r
+  def stringArg(name: String): Option[String] =
+    args.toSeq.sliding(2).collectFirst {
+      case Seq(MinusToken(`name`), value) ⇒ value
+    }
+
+  val targetVersion =
+    stringArg("t").map(ScalaVersion(_)).getOrElse(ScalaVersion.`2.12.0-M1`)
+  val lastVersion =
+    stringArg("l").map(ScalaVersion(_)).getOrElse(ScalaVersion.`2.11`)
+
+  println(s"TargetVersion: $targetVersion LastVersion: $lastVersion")
 
   val quiet = args.exists(_ == "-q")
   val preferCached = args.exists(_ == "-c")
