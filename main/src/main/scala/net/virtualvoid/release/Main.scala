@@ -25,7 +25,7 @@ object Main extends App {
 
   val maxTargetVersionMissingAge = maxCachedFor(10.minutes)
   val maxTargetVersionExistingAge = maxCachedFor(6.hours)
-  val maxOldVersionAge = maxCachedFor(1.day)
+  val maxOldVersionAge = maxCachedFor(7.days)
 
   implicit class AddIsOlderThan(val timestamp: DateTime) extends AnyVal {
     def isOlderThan(duration: Duration): Boolean =
