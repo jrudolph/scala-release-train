@@ -50,7 +50,7 @@ class IvyRepositoryImplementation(logger: sbt.Logger) extends RepositoryInterfac
 
 object IvyRepositoryImplementation {
   def apply(quiet: Boolean): RepositoryInterface = {
-    val logger = if (quiet) NoLogger else sbt.ConsoleLogger()
+    val logger = if (quiet) NoLogger else sbt.ConsoleLogger(Console.err)
     new IvyRepositoryImplementation(logger)
   }
 }
