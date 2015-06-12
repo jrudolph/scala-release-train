@@ -16,6 +16,11 @@ object Main extends App {
   val preferCached = args.exists(_ == "-c")
   val onlyCached = args.exists(_ == "-n")
   val releaseNotesAnalysis = args.exists(_ == "-r")
+  val cacheFile = args.collectFirst {
+    case a if a.startsWith("--cache=") ⇒ a.substring(8)
+  }.getOrElse("cache.bin")
+
+  Console.err.println(s"Using cache-file '$cacheFile'")
   def maxCachedFor(dur: Duration): Duration = if (preferCached || onlyCached) 10000.days else dur
 
   val maxTargetVersionMissingAge = maxCachedFor(10.minutes)
@@ -36,7 +41,7 @@ object Main extends App {
     case _                           ⇒ false
   }
 
-  val storage = Storage.asJsonFromFile[Entry](new File("cache.bin"), isOldVersions)
+  val storage = Storage.asJsonFromFile[Entry](new File(cacheFile), isOldVersions)
   val backend = if (onlyCached) NoRepository else IvyRepositoryImplementation(quiet)
   val impl = CachedRepository(storage, backend)
 
