@@ -10,7 +10,7 @@ object Libraries {
   val akkaOsgi = lib("akka-osgi", "com.typesafe.akka", "akka-osgi")
   val akkaSlf4j = lib("akka-slf4j", "com.typesafe.akka", "akka-slf4j")
   val akkaTestkit = lib("akka-testkit", "com.typesafe.akka", "akka-testkit")
-  val slick = lib("slick", "com.typesafe", "slick")
+  val slick = lib("slick", "com.typesafe.slick", "slick")
 
   val scalaXml = lib("scala-xml", "org.scala-lang.modules", "scala-xml")
   val scalaParserCombinators = lib("scala-parser-combinators", "org.scala-lang.modules", "scala-parser-combinators")
