@@ -38,7 +38,7 @@ object RepositoryInfo {
     val libraryModules: Seq[ModuleDef] = _libraries.map(_.moduleDef)
 
     def resolve(module: ModuleDef): ModuleState = {
-      if (!quiet) println(s"Resolving $module")
+      if (!quiet) Console.err.println(s"Resolving $module")
       val lastVersions = ivy.findVersion(module, _lastVersion)
       // This will prevent modules that was a java/other module in lastVersion to change being a Scala module
       // in targetVersion if not declared as a library
