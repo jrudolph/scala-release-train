@@ -5,8 +5,8 @@ import net.virtualvoid.release.model.{ ModuleDef, Library }
 object Libraries {
   // TYPESAFE
   val akkaActor = lib("akka-actor", "com.typesafe.akka", "akka-actor")
-  val akkaStream = lib("akka-actor", "com.typesafe.akka", "akka-stream-experimental")
-  val akkaHttp = lib("akka-actor", "com.typesafe.akka", "akka-http-experimental")
+  val akkaStream = lib("akka-stream", "com.typesafe.akka", "akka-stream-experimental")
+  val akkaHttp = lib("akka-http", "com.typesafe.akka", "akka-http-experimental")
   val akkaOsgi = lib("akka-osgi", "com.typesafe.akka", "akka-osgi")
   val akkaSlf4j = lib("akka-slf4j", "com.typesafe.akka", "akka-slf4j")
   val akkaTestkit = lib("akka-testkit", "com.typesafe.akka", "akka-testkit")
@@ -148,4 +148,6 @@ object Libraries {
 
   def lib(name: String, organization: String, module: String, twitterHandle: Option[String] = None) =
     Library(name, ModuleDef(organization, module), twitterHandle)
+
+  require(all.map(_.name).distinct.size == all.size, "Duplicate name detected")
 }
