@@ -121,11 +121,11 @@ object Libraries {
     scalafx,
     scalatra,
     scalateCore,
-    ghscalaCore,
+    // ghscalaCore, still no 2.11 version as of 2015-06-12
     platformExecuting,
     nscalaTime,
     nalloc,
-    f0,
+    //f0, still no 2.11 version as of 2015-06-12
     scrimage,
     monifu,
     macwire,
