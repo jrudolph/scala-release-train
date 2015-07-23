@@ -64,6 +64,8 @@ object Libraries {
 
   val kiama = lib("kiama", "com.googlecode.kiama", "kiama")
 
+  val scalactic = lib("scalactic", "org.scalactic", "scalactic")
+
   val finagleCore = lib("finagle-core", "com.twitter", "finagle-core")
   val ostrich = lib("ostrich", "com.twitter", "ostrich")
   val algebirdCore = lib("algebird-core", "com.twitter", "algebird-core")
@@ -132,6 +134,8 @@ object Libraries {
     scalamacrodebug,
 
     kiama,
+
+    scalactic,
 
     finagleCore,
     ostrich,
