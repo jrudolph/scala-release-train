@@ -100,6 +100,9 @@ object Libraries {
   val jawnRojoma = lib("jawn-rojoma", "org.spire-math", "jawn-rojoma")
   val jawnSpray = lib("jawn-spray", "org.spire-math", "jawn-spray")
 
+  val monocleCore = lib("monocle-core", "com.github.julien-truffaut", "monocle-core")
+  val monocleMacro = lib("monocle-macro", "com.github.julien-truffaut", "monocle-macro")
+
   val all: Seq[Library] = Seq(
     akkaActor,
     akkaStream,
@@ -189,7 +192,10 @@ object Libraries {
     jawnJson4s,
     jawnPlay,
     jawnRojoma,
-    jawnSpray)
+    jawnSpray,
+
+    monocleCore,
+    monocleMacro)
 
   def lib(name: String, organization: String, module: String, twitterHandle: Option[String] = None) =
     Library(name, ModuleDef(organization, module), twitterHandle)
