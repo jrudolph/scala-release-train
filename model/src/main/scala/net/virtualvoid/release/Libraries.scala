@@ -66,7 +66,13 @@ object Libraries {
   val monifu = lib("monifu", "org.monifu", "monifu")
   val macwire = lib("MacWire", "com.softwaremill.macwire", "macros")
   val scalamacrodebug = lib("scalamacrodebug", "com.softwaremill.scalamacrodebug", "macros")
+
   val scodecCore = lib("scodec-core", "org.scodec", "scodec-core")
+  val scodecBits = lib("scodec-bits", "org.scodec", "scodec-bits")
+  val scodecScalaz = lib("scodec-scalaz", "org.scodec", "scodec-scalaz")
+  val scodecStream = lib("scodec-stream", "org.scodec", "scodec-stream")
+  val scodecProtocols = lib("scodec-protocols", "org.scodec", "scodec-protocols")
+  val scodecSpire = lib("scodec-spire", "org.scodec", "scodec-spire")
 
   val kiama = lib("kiama", "com.googlecode.kiama", "kiama")
 
@@ -146,6 +152,11 @@ object Libraries {
     macwire,
     scalamacrodebug,
     scodecCore,
+    scodecBits,
+    scodecScalaz,
+    scodecStream,
+    scodecProtocols,
+    scodecSpire,
 
     kiama,
 
