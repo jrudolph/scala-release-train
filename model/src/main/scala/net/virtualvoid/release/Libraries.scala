@@ -42,7 +42,6 @@ object Libraries {
   // INFRASTRUCTURE + OTHERS
   val spire = lib("spire", "org.spire-math", "spire")
   val cats = lib("cats", "org.spire-math", "cats")
-  val jawn = lib("jawn", "org.spire-math", "jawn")
   val algebra = lib("algebra", "org.spire-math", "algebra")
   val debox = lib("debox", "org.spire-math", "debox")
   val kindProjector = lib("kind-projector", "org.spire-math", "kind-projector")
@@ -93,6 +92,14 @@ object Libraries {
 
   val fastParse = lib("fastparse", "com.lihaoyi", "fastparse")
 
+  val jawnParser = lib("jawn-parser", "org.spire-math", "jawn-parser")
+  val jawnAst = lib("jawn-ast", "org.spire-math", "jawn-ast")
+  val jawnArgonaut = lib("jawn-argonaut", "org.spire-math", "jawn-argonaut")
+  val jawnJson4s = lib("jawn-json4s", "org.spire-math", "jawn-json4s")
+  val jawnPlay = lib("jawn-play", "org.spire-math", "jawn-play")
+  val jawnRojoma = lib("jawn-rojoma", "org.spire-math", "jawn-rojoma")
+  val jawnSpray = lib("jawn-spray", "org.spire-math", "jawn-spray")
+
   val all: Seq[Library] = Seq(
     akkaActor,
     akkaStream,
@@ -127,7 +134,6 @@ object Libraries {
 
     spire,
     cats,
-    jawn,
     algebra,
     debox,
     kindProjector,
@@ -175,7 +181,15 @@ object Libraries {
 
     twirlApi,
 
-    fastParse)
+    fastParse,
+
+    jawnParser,
+    jawnAst,
+    jawnArgonaut,
+    jawnJson4s,
+    jawnPlay,
+    jawnRojoma,
+    jawnSpray)
 
   def lib(name: String, organization: String, module: String, twitterHandle: Option[String] = None) =
     Library(name, ModuleDef(organization, module), twitterHandle)
