@@ -41,6 +41,11 @@ object Libraries {
 
   // INFRASTRUCTURE + OTHERS
   val spire = lib("spire", "org.spire-math", "spire")
+  val cats = lib("cats", "org.spire-math", "cats")
+  val jawn = lib("jawn", "org.spire-math", "jawn")
+  val algebra = lib("algebra", "org.spire-math", "algebra")
+  val debox = lib("debox", "org.spire-math", "debox")
+  val kindProjector = lib("kind-projector", "org.spire-math", "kind-projector")
   val scalazCore = lib("scalaz", "org.scalaz", "scalaz-core")
   val shapeless = lib("shapeless", "com.chuusai", "shapeless")
   val parboiled = lib("parboiled", "org.parboiled", "parboiled-scala")
@@ -79,6 +84,8 @@ object Libraries {
 
   val twirlApi = lib("twirl-api", "io.spray", "twirl-api")
 
+  val fastParse = lib("fastparse", "com.lihaoyi" , "fastparse" )
+
   val all: Seq[Library] = Seq(
     akkaActor,
     akkaStream,
@@ -112,6 +119,11 @@ object Libraries {
     jsonLenses,
 
     spire,
+    cats,
+    jawn,
+    algebra,
+    debox,
+    kindProjector,
     scalazCore,
     shapeless,
     parboiled,
@@ -148,7 +160,9 @@ object Libraries {
     sprayRouting,
     sprayCan,
 
-    twirlApi)
+    twirlApi,
+
+    fastParse)
 
   def lib(name: String, organization: String, module: String, twitterHandle: Option[String] = None) =
     Library(name, ModuleDef(organization, module), twitterHandle)
