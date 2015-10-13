@@ -66,6 +66,7 @@ object Libraries {
   val monifu = lib("monifu", "org.monifu", "monifu")
   val macwire = lib("MacWire", "com.softwaremill.macwire", "macros")
   val scalamacrodebug = lib("scalamacrodebug", "com.softwaremill.scalamacrodebug", "macros")
+  val scodecCore = lib("scodec-core", "org.scodec", "scodec-core")
 
   val kiama = lib("kiama", "com.googlecode.kiama", "kiama")
 
@@ -84,7 +85,7 @@ object Libraries {
 
   val twirlApi = lib("twirl-api", "io.spray", "twirl-api")
 
-  val fastParse = lib("fastparse", "com.lihaoyi" , "fastparse" )
+  val fastParse = lib("fastparse", "com.lihaoyi", "fastparse")
 
   val all: Seq[Library] = Seq(
     akkaActor,
@@ -144,6 +145,7 @@ object Libraries {
     monifu,
     macwire,
     scalamacrodebug,
+    scodecCore,
 
     kiama,
 
