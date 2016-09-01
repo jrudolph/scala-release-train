@@ -41,7 +41,6 @@ object Libraries {
 
   // INFRASTRUCTURE + OTHERS
   val spire = lib("spire", "org.spire-math", "spire")
-  val cats = lib("cats", "org.spire-math", "cats")
   val algebra = lib("algebra", "org.spire-math", "algebra")
   val debox = lib("debox", "org.spire-math", "debox")
   val kindProjector = lib("kind-projector", "org.spire-math", "kind-projector")
@@ -65,13 +64,6 @@ object Libraries {
   val monifu = lib("monifu", "org.monifu", "monifu")
   val macwire = lib("MacWire", "com.softwaremill.macwire", "macros")
   val scalamacrodebug = lib("scalamacrodebug", "com.softwaremill.scalamacrodebug", "macros")
-
-  val scodecCore = lib("scodec-core", "org.scodec", "scodec-core")
-  val scodecBits = lib("scodec-bits", "org.scodec", "scodec-bits")
-  val scodecScalaz = lib("scodec-scalaz", "org.scodec", "scodec-scalaz")
-  val scodecStream = lib("scodec-stream", "org.scodec", "scodec-stream")
-  val scodecProtocols = lib("scodec-protocols", "org.scodec", "scodec-protocols")
-  val scodecSpire = lib("scodec-spire", "org.scodec", "scodec-spire")
 
   val kiama = lib("kiama", "com.googlecode.kiama", "kiama")
 
@@ -102,6 +94,22 @@ object Libraries {
 
   val monocleCore = lib("monocle-core", "com.github.julien-truffaut", "monocle-core")
   val monocleMacro = lib("monocle-macro", "com.github.julien-truffaut", "monocle-macro")
+
+  val fs2 = lib("fs2", "co.fs2", "fs2-core")
+
+  val alleycats = lib("org.typelevel", "alleycats")
+  val catalysts = lib("org.typelevel", "catalysts")
+  val cats = lib("org.typelevel", "cats")
+  val discipline = lib("org.typelevel", "discipline")
+  val dogs = lib("org.typelevel", "dogs")
+  val machinist = lib("org.typelevel", "machinist")
+
+  val scodecCore = lib("org.typelevel", "scodec-core")
+  val scodecBits = lib("org.typelevel", "scodec-bits")
+  val scodecScalaz = lib("org.typelevel", "scodec-scalaz")
+  val scodecStream = lib("org.typelevel", "scodec-stream")
+  val scodecProtocols = lib("org.typelevel", "scodec-protocols")
+  val scodecSpire = lib("org.typelevel", "scodec-spire")
 
   val all: Seq[Library] = Seq(
     akkaActor,
@@ -136,7 +144,6 @@ object Libraries {
     jsonLenses,
 
     spire,
-    cats,
     algebra,
     debox,
     kindProjector,
@@ -160,12 +167,6 @@ object Libraries {
     monifu,
     macwire,
     scalamacrodebug,
-    scodecCore,
-    scodecBits,
-    scodecScalaz,
-    scodecStream,
-    scodecProtocols,
-    scodecSpire,
 
     kiama,
 
@@ -195,10 +196,28 @@ object Libraries {
     jawnSpray,
 
     monocleCore,
-    monocleMacro)
+    monocleMacro,
 
-  def lib(name: String, organization: String, module: String, twitterHandle: Option[String] = None) =
+    fs2,
+
+    // typelevel projects
+    alleycats,
+    catalysts,
+    cats,
+    discipline,
+    dogs,
+    machinist,
+
+    scodecBits,
+    scodecCore,
+    scodecProtocols,
+    scodecStream)
+
+  def lib(name: String, organization: String, module: String, twitterHandle: Option[String] = None): Library =
     Library(name, ModuleDef(organization, module), twitterHandle)
+
+  def lib(organization: String, module: String): Library =
+    lib(module, organization, module)
 
   require(all.map(_.name).distinct.size == all.size, "Duplicate name detected")
 }
