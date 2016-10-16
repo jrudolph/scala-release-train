@@ -111,6 +111,12 @@ object Libraries {
   val scodecProtocols = lib("org.typelevel", "scodec-protocols")
   val scodecSpire = lib("org.typelevel", "scodec-spire")
 
+  val scodecCoreOld = lib("org.scodec", "scodec-core")
+  val scodecBitsOld = lib("org.scodec", "scodec-bits")
+
+  val simulacrum = lib("com.github.mpilquist", "simulacrum")
+  val enumeratum = lib("com.beachape", "enumeratum")
+
   val all: Seq[Library] = Seq(
     akkaActor,
     akkaStream,
@@ -211,7 +217,15 @@ object Libraries {
     scodecBits,
     scodecCore,
     scodecProtocols,
-    scodecStream)
+    scodecScalaz,
+    scodecSpire,
+    scodecStream,
+
+    scodecCoreOld,
+    scodecBitsOld,
+
+    simulacrum,
+    enumeratum)
 
   def lib(name: String, organization: String, module: String, twitterHandle: Option[String] = None): Library =
     Library(name, ModuleDef(organization, module), twitterHandle)
