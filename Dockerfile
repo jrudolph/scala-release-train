@@ -1,4 +1,4 @@
-FROM jrudolph/ubuntu-openjdk7-jre
+FROM jrudolph/ubuntu-openjdk8-jre
 
 MAINTAINER jrudolph
 
