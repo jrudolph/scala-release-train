@@ -111,8 +111,8 @@ object Libraries {
   val scodecProtocols = lib("org.typelevel", "scodec-protocols")
   val scodecSpire = lib("org.typelevel", "scodec-spire")
 
-  val scodecCoreOld = lib("org.scodec", "scodec-core")
-  val scodecBitsOld = lib("org.scodec", "scodec-bits")
+  val scodecCoreOld = lib("scodec-core-old", "org.scodec", "scodec-core")
+  val scodecBitsOld = lib("scodec-core-bits", "org.scodec", "scodec-bits")
 
   val simulacrum = lib("com.github.mpilquist", "simulacrum")
   val enumeratum = lib("com.beachape", "enumeratum")
