@@ -18,6 +18,7 @@ object Libraries {
   val async = lib("async", "org.scala-lang.modules", "scala-async")
   val scalaLoggingSlf4f = lib("scala-logging-slf4j", "com.typesafe.scala-logging", "scala-logging-slf4j")
   val macroParadise = lib("macro-paradise", "org.scalamacros", "paradise")
+  val scalaJava8Compat = lib("scala-java8-compat", "org.scala-lang.modules")
 
   // TESTING
   val scalaTest = lib("scalatest", "org.scalatest", "scalatest")
@@ -131,6 +132,7 @@ object Libraries {
     async,
     scalaLoggingSlf4f,
     //macroParadise, // cross-published with full version
+    scalaJava8Compat,
 
     scalaTest,
     specs2,
