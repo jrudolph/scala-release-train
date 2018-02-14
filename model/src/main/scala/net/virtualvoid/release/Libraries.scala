@@ -6,7 +6,8 @@ object Libraries {
   // TYPESAFE
   val akkaActor = lib("akka-actor", "com.typesafe.akka", "akka-actor")
   val akkaStream = lib("akka-stream", "com.typesafe.akka", "akka-stream")
-  val akkaHttp = lib("akka-http", "com.typesafe.akka", "akka-http-experimental")
+  val akkaHttpCore = lib("akka-http-core", "com.typesafe.akka", "akka-http-core")
+  val akkaHttp = lib("akka-http", "com.typesafe.akka", "akka-http")
   val akkaOsgi = lib("akka-osgi", "com.typesafe.akka", "akka-osgi")
   val akkaSlf4j = lib("akka-slf4j", "com.typesafe.akka", "akka-slf4j")
   val akkaTestkit = lib("akka-testkit", "com.typesafe.akka", "akka-testkit")
@@ -83,7 +84,10 @@ object Libraries {
 
   val twirlApi = lib("twirl-api", "io.spray", "twirl-api")
 
-  val fastParse = lib("fastparse", "com.lihaoyi", "fastparse")
+  val fastparse = lib("fastparse", "com.lihaoyi", "fastparse")
+  val scalatags = lib("scalatags", "com.lihaoyi", "scalatags")
+  val pprint = lib("pprint", "com.lihaoyi", "pprint")
+  val utest = lib("utest", "com.lihaoyi", "utest")
 
   val jawnParser = lib("jawn-parser", "org.spire-math", "jawn-parser")
   val jawnAst = lib("jawn-ast", "org.spire-math", "jawn-ast")
@@ -121,6 +125,7 @@ object Libraries {
   val all: Seq[Library] = Seq(
     akkaActor,
     akkaStream,
+    akkaHttpCore,
     akkaHttp,
     akkaOsgi,
     akkaSlf4j,
@@ -193,7 +198,10 @@ object Libraries {
 
     twirlApi,
 
-    fastParse,
+    fastparse,
+    scalatags,
+    pprint,
+    utest,
 
     jawnParser,
     jawnAst,
