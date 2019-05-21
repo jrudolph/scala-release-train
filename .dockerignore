@@ -1,0 +1,4 @@
+target
+.git
+main/target/streams
+main/target/scala-2.10/classes
