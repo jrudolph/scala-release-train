@@ -9,8 +9,7 @@ CMD echo -n "$GIST_CREDENTIALS" > ~/.gist && gist -l && /bin/bash /tmp/update.sh
 
 VOLUME ["/tmp/run"]
 
-COPY scripts/update.sh /tmp/update.sh
-
 # Setup files needed for running
 COPY main/target/scala-2.10/release-train-main-assembly-0.1-SNAPSHOT.jar /tmp/release-train-main-assembly-0.1-SNAPSHOT.jar
 
+COPY scripts/update.sh /tmp/update.sh
