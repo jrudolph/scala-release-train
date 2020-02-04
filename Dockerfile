@@ -14,4 +14,4 @@ COPY main/target/scala-2.10/release-train-main-assembly-0.1-SNAPSHOT.jar /tmp/re
 
 COPY scripts/update.sh /tmp/update.sh
 
-ENV LATEST_VERSION 2.13.0-RC2
+ENV LATEST_VERSION 2.13
